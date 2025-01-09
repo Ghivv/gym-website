@@ -12,7 +12,8 @@ class WorkoutController extends Controller
      */
     public function index()
     {
-        //
+        $workout = Workout::all();
+        return view('workouts.index', compact('workouts'));
     }
 
     /**
@@ -20,7 +21,7 @@ class WorkoutController extends Controller
      */
     public function create()
     {
-        //
+        return view('workouts.create');
     }
 
     /**
@@ -28,7 +29,14 @@ class WorkoutController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        Workout::create($request->all());
+        return redirect()->route('workouts.index')->with('success', 'Workout created successfully.');
+
     }
 
     /**
@@ -36,7 +44,7 @@ class WorkoutController extends Controller
      */
     public function show(Workout $workout)
     {
-        //
+        return view('workouts.show', compact('workout'));
     }
 
     /**
@@ -44,7 +52,7 @@ class WorkoutController extends Controller
      */
     public function edit(Workout $workout)
     {
-        //
+        return view('workouts.edit', compact('workout'));
     }
 
     /**
@@ -52,7 +60,13 @@ class WorkoutController extends Controller
      */
     public function update(Request $request, Workout $workout)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        $workout->update($request->all());
+        return redirect()->route('workouts.index')->with('success', 'Workout updated successfully.');
     }
 
     /**
@@ -60,6 +74,7 @@ class WorkoutController extends Controller
      */
     public function destroy(Workout $workout)
     {
-        //
+        $workout->delete();
+        return redirect()->route('workouts.index')->with('success', 'Workout deleted successfully.');
     }
 }
