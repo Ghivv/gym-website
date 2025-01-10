@@ -6,10 +6,18 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\WorkoutController;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\HomeController;
+
+// Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('articles.index');
 });
+
+Route::get('/index', function () {
+    return view('articles.index');
+});
+
 
 Route::resource('user_gyms', UserGymController::class);
 Route::resource('articles', ArticleController::class);
