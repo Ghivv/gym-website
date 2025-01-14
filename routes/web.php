@@ -11,12 +11,12 @@ use App\Http\Controllers\HomeController;
 // Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/', function () {
-    return view('articles.index');
+    return view('home');
 });
 
-Route::get('/index', function () {
-    return view('articles.index');
-});
+// Route::get('/index', function () {
+//     return view('articles.index');
+// });
 
 
 Route::resource('user_gyms', UserGymController::class);
